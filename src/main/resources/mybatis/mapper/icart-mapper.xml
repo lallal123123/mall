@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fruitMall.dao.ICartDao">
+
+<insert id="reg">
+insert into carts values(null,#{cart.username},#{cart.product_id},#{cart.quantity},now())
+</insert>
+
+<select id="listByUsername" resultType="com.example.fruitMall.dto.Cart">
+SELECT c.*, p.name product_name,p.img_url
+	FROM carts c 
+	LEFT JOIN products p
+	on c.product_id = p.product_id 
+	WHERE c.username=#{username}
+</select>
+<select id="getCart" resultType="com.example.fruitMall.dto.Cart">
+select * from carts where cart_id = #{cart_id}
+</select>
+
+<delete id="delete">
+delete from carts where cart_id=#{id}
+</delete>
+
+</mapper>

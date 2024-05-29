@@ -1,0 +1,42 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fruitMall.dao.IProductDao">
+
+<insert id="reg">
+	insert into products 
+	values(null,#{dto.name},#{dto.price},#{dto.stock},#{dto.content},#{dto.img_url},1,#{dto.category})
+</insert>
+<select id="fruitList" resultType="com.example.fruitMall.dto.Fruit">
+	select * from fruit
+</select>
+<select id="list" resultType="com.example.fruitMall.dto.Product">
+	select * from Products
+</select>
+<select id="detail" resultType="com.example.fruitMall.dto.Product">
+	select * from Products where product_id = #{no}
+</select>
+<delete id="delete">
+	delete from products where product_id = #{no}
+</delete>
+<update id="updateNoImg">
+	update products set name=#{dto.name},price=#{dto.price},stock=#{dto.stock},
+	content=#{dto.content},status=#{dto.status},category=#{dto.category}
+	where product_id=#{dto.product_id}
+</update>
+<update id="update">
+	update products set name=#{dto.name},price=#{dto.price},stock=#{dto.stock},
+	content=#{dto.content},status=#{dto.status},category=#{dto.category},img_url=#{dto.img_url}
+	where product_id=#{dto.product_id}
+</update>
+
+<update id="updateStockDown">
+update products set stock=stock-#{quantity} where product_id=${product_id}
+</update>
+<update id="updateStockUp">
+update products set stock=stock+#{quantity} where product_id=${product_id}
+</update>
+<update id="updateStatus">
+update products set status=#{status} where product_id=${product_id}
+</update>
+</mapper>

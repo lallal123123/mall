@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fruitMall.dao.IMemberDao">
+
+<insert id="reg">
+	insert into members 
+	values(#{dto.username},#{dto.pw},#{dto.email},#{dto.name},#{dto.address},#{dto.role})
+</insert>
+
+<select id="login" resultType="com.example.fruitMall.dto.Member">
+	select * from members where username=#{dto.username} and pw=#{dto.pw}
+</select>
+</mapper>
