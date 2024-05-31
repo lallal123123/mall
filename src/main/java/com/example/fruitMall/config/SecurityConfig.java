@@ -31,13 +31,13 @@ public class SecurityConfig {
 				.permitAll()
 				);
 		
-//		http.logout((auth) -> auth 
-//                .logoutUrl("/logout")                           // 로그아웃 URL 지정
-//                .logoutSuccessUrl("/")          // 로그아웃 성공 시 이동할 URL
-//                .invalidateHttpSession(true)                    // 세션 무효화
-//                .deleteCookies("JSESSIONID")                    // 쿠키 삭제
-//                .permitAll()
-//        );
+		http.logout((auth) -> auth 
+                .logoutUrl("/logout")                           // 로그아웃 URL 지정
+                .logoutSuccessUrl("/")          // 로그아웃 성공 시 이동할 URL
+               .invalidateHttpSession(true)                    // 세션 무효화
+               .deleteCookies("JSESSIONID")                    // 쿠키 삭제
+                .permitAll()
+        );
 		
 		http.csrf(AbstractHttpConfigurer::disable);		//csrf 기능 끄기
 		return http.build();
