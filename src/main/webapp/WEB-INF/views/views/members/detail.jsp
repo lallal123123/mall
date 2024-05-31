@@ -75,7 +75,6 @@
 					</c:if>
 			</c:forEach>
 			
-			
 			<div>
 			<c:choose>
 				<c:when test="${isOrdered }">

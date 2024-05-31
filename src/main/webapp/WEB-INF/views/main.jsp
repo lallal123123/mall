@@ -1,44 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.item-container {
-    width: 100%; /* 부모 요소의 전체 너비를 사용 */
-}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Page</title>
 
-.dto {
-    width: calc(33.33% - 20px); /* 3분할. 여백 고려하여 너비 설정 */
-    float: left; /* 왼쪽으로 정렬 */
-    margin: 10px; /* 여백 설정 */
-    box-sizing: border-box; /* 너비와 높이를 요소의 경계선까지 포함 */
-}
-</style>
 </head>
 <body>
- <jsp:include page="/WEB-INF/views/header.jsp" />
-<h1>main page</h1>
-<div class="item-container">
-<c:forEach var="dto" items="${list }">
-<c:if test="${dto.status eq 1 }">
-<div class="dto">
-	카테고리:${dto.category }<br>
-	<a href="members/detail?id=${dto.product_id }"><img src="/uploads/${dto.img_url}" width="100%" height="300px"></a>
-	상품명:${dto.name }<br>
-	가격:${dto.price }<br>
-</div>
-</c:if>
-</c:forEach>
+	<jsp:include page="/WEB-INF/views/header.jsp" />
+	<header>
+		<h1>Main Page</h1>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous">
+	</header>
+
+	<div class="container text-center">
+		<div class="row row-cols-3">
+
+			<c:forEach var="dto" items="${list}">
+				<c:if test="${dto.status eq 1}">
+					<div class="col">
+						<img src="/uploads/${dto.img_url}" class="img-thumbnail rounded "
+							alt="${dto.name}"  height="300px">
+						<div class="item-content">
+							<h3>${dto.name}</h3>
+							<p>Category: ${dto.category}</p>
+							<p>Price: ${dto.price}</p>
+							<a href="members/detail?id=${dto.product_id}">View Details</a>
+						</div>
+
+					</div>
+				</c:if>
+			</c:forEach>
+		</div>
+	</div>
+
 
 </body>
-<script>
-    var msg = "${msg}";
-    if (msg !== "") {
-        alert(msg);
-    }
-</script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 </html>

@@ -11,11 +11,11 @@
 <h1>regForm page</h1>
 <hr>
 <form action="reg" method="post">
-	아이디 : <input type="text" name="username"><br>
-	비밀번호 : <input type="text" name="pw"><br>
-	이름 : <input type="text" name="name"><br>
-	이메일 : <input type="text" name="email"><br>
-	주소 : <input type="text" name="address"><br>
+	아이디 : <input type="text" name="username" required><br>
+	비밀번호 : <input type="text" name="pw" required><br>
+	이름 : <input type="text" name="name" required><br>
+	이메일 : <input type="text" name="email" required><br>
+	주소 : <input type="text" name="address" required><br>
 	<input type="hidden" name="role" value ="ROLE_MEMBER">
 	<button>회원가입</button>
 </form>

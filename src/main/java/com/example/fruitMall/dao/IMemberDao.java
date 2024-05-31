@@ -10,4 +10,5 @@ public interface IMemberDao {
 
 	public void reg(@Param("dto") Member member);
 	public Member login(@Param("dto") Member member);
+	public Member memberByUsername(@Param("username") String Username);
 }

@@ -10,9 +10,9 @@
  <jsp:include page="/WEB-INF/views/header.jsp" />
 <h1>login page</h1>
 
-	<form action="login" method="post">
-		아이디 : <input type="text" name="username"><br>
-		비밀번호 : <input type="text" name="pw">
+	<form action="/loginProc" method="post">
+		아이디 : <input type="text" name="username" required><br>
+		비밀번호 : <input type="text" name="password" required>
 		<button>로그인</button>
 	</form>
 

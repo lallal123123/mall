@@ -1,13 +1,10 @@
 package com.example.fruitMall.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +17,9 @@ import com.example.fruitMall.dao.IProductDao;
 import com.example.fruitMall.dao.IReviewDao;
 import com.example.fruitMall.dto.Product;
 import com.example.fruitMall.dto.ProductFile;
+import com.example.fruitMall.security.MySecurity;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,22 +35,27 @@ public class AdminController {
 	ICartDao cdao;
 	@Autowired
 	IReviewDao rdao;
+	@Autowired
+	MySecurity ms;
 
-	// 관리자모드 들어가는 컨트롤러 생성!!!!!
+	// 관리자모드 들어가는 컨트롤러
 	@RequestMapping("/mypage")
 	public String adminMypage() {
+		
 		return "admin/mypage";
 	}
 
 	@RequestMapping("/productRegForm")
-	public String productRegForm(Model model) {
+	public String productRegForm(Model model ) {
+		
 		model.addAttribute("fruitList", pdao.fruitList());
 
 		return "admin/productRegForm";
 	}
 
 	@RequestMapping("/productReg")
-	public String productReg(ProductFile productFile) throws IOException {
+	public String productReg(ProductFile productFile ) throws IOException {
+		
 		Product p = new Product();
 		p.setName(productFile.getName());
 		p.setPrice(productFile.getPrice());
@@ -70,14 +75,16 @@ public class AdminController {
 	}
 
 	@RequestMapping("/list")
-	public String list(Model model) {
+	public String list(Model model ) {
+		
 		List<Product> list = pdao.list();
 		model.addAttribute("list", list);
 		return "admin/list";
 	}
 
 	@RequestMapping("/detail")
-	public String detail(@RequestParam("no") String no, Model model) {
+	public String detail(@RequestParam("no") String no, Model model ) {
+		
 		Product dto = pdao.detail(no);
 
 		model.addAttribute("dto", dto);
@@ -86,13 +93,15 @@ public class AdminController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(@RequestParam("no") String no) {
+	public String delete(@RequestParam("no") String no ) {
+		
 		pdao.delete(no);
 		return "redirect:/admin/list";
 	}
 
 	@RequestMapping("/updateForm")
-	public String updateForm(@RequestParam("id") String id, Model model) {
+	public String updateForm(@RequestParam("id") String id, Model model ) {
+		
 		Product p = pdao.detail(id);
 		model.addAttribute("dto", p);
 		System.out.println(p);
@@ -102,7 +111,8 @@ public class AdminController {
 	}
 
 	@RequestMapping("/update")
-	public String update(ProductFile productFile) throws IOException {
+	public String update(ProductFile productFile ) throws IOException {
+		
 		Product p = new Product();
 		p.setName(productFile.getName());
 		p.setPrice(productFile.getPrice());

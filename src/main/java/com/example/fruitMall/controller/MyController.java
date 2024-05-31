@@ -2,6 +2,7 @@ package com.example.fruitMall.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class MyController {
 	@Autowired
 	IReviewDao rdao;
 	@Autowired
-	private ResourceLoader resourceLoader;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping("/")
 	public String root(Model model) {
@@ -42,31 +43,19 @@ public class MyController {
 	public String regForm() {
 		return "regForm";
 	}
-	@RequestMapping("reg")
+	@RequestMapping("/reg")
 	public String reg(Member member) {
+		
+		String newPw = bCryptPasswordEncoder.encode(member.getPw());
+		member.setPw(newPw);
 		mdao.reg(member);
 		return "main";
 	}
-	@RequestMapping("loginPage")
+	@RequestMapping("/login")
 	public String loginPage() {
-		return "login";
+		return "loginForm";
 	}
-	@RequestMapping("login")
-	public String login(Member member,HttpSession session,Model model ) {
-		Member m = mdao.login(member);
-		
-		if(m == null) {
-			model.addAttribute("msg", "아이디 혹은 패스워드가 일치하지 않습니다.");
-			return "login";
-		}
-		session.setAttribute("loginMember",m);
-		return "redirect:/";
-	}
-	@RequestMapping("logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
+	
 	
 	
 	

@@ -11,4 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="login" resultType="com.example.fruitMall.dto.Member">
 	select * from members where username=#{dto.username} and pw=#{dto.pw}
 </select>
+<select id="memberByUsername" resultType="com.example.fruitMall.dto.Member">
+	select * from members where username=#{username}
+</select>
 </mapper>
